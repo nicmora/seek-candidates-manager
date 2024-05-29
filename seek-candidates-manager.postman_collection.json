@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "c6ae38ab-2837-41ce-9068-254dbcca2aae",
+		"name": "seek-candidates-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13470508"
+	},
+	"item": [
+		{
+			"name": "candidates",
+			"item": [
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates",
+							"host": [
+								"{{SEEK_CANDIDATES_MANAGER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates/:id",
+							"host": [
+								"{{SEEK_CANDIDATES_MANAGER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 10000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates",
+							"host": [
+								"{{SEEK_CANDIDATES_MANAGER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateByName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@gmail.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 20000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates/:id",
+							"host": [
+								"{{SEEK_CANDIDATES_MANAGER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates/:id",
+							"host": [
+								"{{SEEK_CANDIDATES_MANAGER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "health",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/health",
+					"host": [
+						"{{SEEK_CANDIDATES_MANAGER_URL}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SEEK_CANDIDATES_MANAGER_URL",
+			"value": "http://localhost:8080/seek-candidates-manager",
+			"type": "string"
+		}
+	]
+}
