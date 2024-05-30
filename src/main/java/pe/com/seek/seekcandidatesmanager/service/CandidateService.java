@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CandidateService {
 
     List<CandidateDTO> getAll();
-    Optional<CandidateDTO> getById(Long id);
+    CandidateDTO getById(Long id);
     CandidateDTO create(CandidateDTO candidateDTO);
     CandidateDTO updateById(Long id, CandidateDTO candidateDTO);
     void deleteById(Long id);

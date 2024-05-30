@@ -32,9 +32,26 @@ Para instalar y ejecutar la aplicación, sigue estos pasos:
     docker compose up
     ```
 
-## 📄 Documentación
+## 💻 Instalación (sin Docker Compose)
+1. Ejecutar el comando:
+   ```sh
+   docker run -d \
+    -p 3306:3306 \
+    --name mysqldb \
+    --restart always \
+    -e MYSQL_ROOT_PASSWORD=password \
+    -e MYSQL_DATABASE=mysqldb \
+    -e MYSQL_USER=seekuser \    
+    -e MYSQL_PASSWORD=seekpass \        
+    mysql:8
+   ```
 
-### Postman
+2. Cambiar el host de la url en application.properties, por "localhost":
+   ```
+   spring.datasource.url=jdbc:mysql://localhost:3306/seekdb?allowPublicKeyRetrieval=true&useSSL=false   
+   ```
+
+## 📄 Documentación
 
 Puedes encontrar la documentación completa de la API en Postman en el siguiente enlace:
 
@@ -48,14 +65,11 @@ Puedes encontrar la documentación completa de la API en Postman en el siguiente
 2. **Validaciones del Email:**
     - El campo de email no puede repetirse al crear un nuevo candidato ni modificarse una vez creado.
 
-3. **Eliminación sin verificación de existencia:**
-    - No se verifica la existencia del candidato antes de eliminarlo, lo que podría aumentar la seguridad al agregar esta validación.
-
-4. **Manejo de Excepciones:**
+3. **Manejo de Excepciones:**
     - Se devuelve un mensaje de error "unknown error" para excepciones no personalizadas.
 
-5. **Configuración de la Base de Datos:**
+4. **Configuración de la Base de Datos:**
     - Se utiliza el usuario root para la base de datos, aunque se recomendaría crear un usuario personalizado con permisos específicos.
 
-6. **Autenticación Preconfigurada:**
+5. **Autenticación Preconfigurada:**
     - Se preconfigura un usuario "seekuser" y contraseña "seekpass" para la autenticación. Otra alternativa sería utilizar una base de datos con gestión de usuarios y roles.

@@ -11,7 +11,7 @@ import pe.com.seek.seekcandidatesmanager.domain.dto.CandidateDTO;
 import pe.com.seek.seekcandidatesmanager.domain.entity.Candidate;
 import pe.com.seek.seekcandidatesmanager.exception.CandidateAlreadyExistsException;
 import pe.com.seek.seekcandidatesmanager.exception.CandidateNotFoundException;
-import pe.com.seek.seekcandidatesmanager.mapper.CandidateMapper;
+import pe.com.seek.seekcandidatesmanager.mapper.CandidateDTOMapper;
 import pe.com.seek.seekcandidatesmanager.repository.CandidateRepository;
 import pe.com.seek.seekcandidatesmanager.service.impl.CandidateServiceImpl;
 
@@ -29,7 +29,7 @@ public class CandidateServiceTest {
     private CandidateRepository candidateRepository;
 
     @Spy
-    private CandidateMapper candidateMapper;
+    private CandidateDTOMapper candidateDTOMapper;
 
     @InjectMocks
     private CandidateServiceImpl candidateService;
@@ -68,14 +68,14 @@ public class CandidateServiceTest {
         when(candidateRepository.findById(1L)).thenReturn(Optional.of(candidate));
 
         // Act
-        Optional<CandidateDTO> result = candidateService.getById(1L);
+        CandidateDTO result = candidateService.getById(1L);
 
         // Assert
-        assertTrue(result.isPresent());
-        assertEquals("John Doe", result.get().getName());
-        assertEquals("john@example.com", result.get().getEmail());
-        assertEquals('M', result.get().getGender());
-        assertEquals(50000, result.get().getSalaryExpected());
+        assertNotNull(result);
+        assertEquals("John Doe", result.getName());
+        assertEquals("john@example.com", result.getEmail());
+        assertEquals('M', result.getGender());
+        assertEquals(50000, result.getSalaryExpected());
         verify(candidateRepository).findById(1L);
     }
 
@@ -84,11 +84,8 @@ public class CandidateServiceTest {
         // Arrange
         when(candidateRepository.findById(2L)).thenReturn(Optional.empty());
 
-        // Act
-        Optional<CandidateDTO> result = candidateService.getById(2L);
-
-        // Assert
-        assertTrue(result.isEmpty());
+        // Act & Assert
+        assertThrows(CandidateNotFoundException.class, () -> candidateService.getById(2L));
         verify(candidateRepository).findById(2L);
     }
 
