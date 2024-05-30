@@ -32,17 +32,14 @@ public class CandidateController {
     public ResponseEntity<CandidateDTO> getById(@PathVariable Long id) {
         log.info("{} GET candidate by id with id={}", LOG_KEY, id);
 
-        return candidateService.getById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(candidateService.getById(id));
     }
 
     @PostMapping
     public ResponseEntity<CandidateDTO> create(@RequestBody CandidateDTO candidateDTO) {
         log.info("{} POST create candidate with body={}", LOG_KEY, JSONHandler.getInstance().toJson(candidateDTO));
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(candidateService.create(candidateDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(candidateService.create(candidateDTO));
     }
 
     @PutMapping("/{id}")

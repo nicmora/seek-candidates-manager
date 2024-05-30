@@ -7,7 +7,7 @@ import pe.com.seek.seekcandidatesmanager.domain.entity.Candidate;
 import java.util.function.Function;
 
 @Component
-public class CandidateMapper implements Function<Candidate, CandidateDTO> {
+public class CandidateDTOMapper implements Function<Candidate, CandidateDTO> {
 
     @Override
     public CandidateDTO apply(Candidate candidate) {

@@ -241,7 +241,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found\"\n}"
+							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found with id=999\"\n}"
 						},
 						{
 							"name": "500 INTERNAL SERVER ERROR",
@@ -450,7 +450,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+							"raw": "{\n    \"name\": \"John Connor\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -485,7 +485,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -524,7 +524,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}"
+							"body": "{\n    \"name\": \"John Connor\",\n    \"email\": \"john@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}"
 						},
 						{
 							"name": "404 NOT FOUND",
@@ -533,7 +533,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -569,7 +569,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found\"\n}"
+							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found with id=999\"\n}"
 						},
 						{
 							"name": "500 INTERNAL SERVER ERROR",
@@ -578,7 +578,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -691,6 +691,51 @@
 							],
 							"cookie": [],
 							"body": ""
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=999",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found with id=999\"\n}"
 						},
 						{
 							"name": "500 INTERNAL SERVER ERROR",

@@ -6,7 +6,7 @@ import pe.com.seek.seekcandidatesmanager.domain.dto.CandidateDTO;
 import pe.com.seek.seekcandidatesmanager.domain.entity.Candidate;
 import pe.com.seek.seekcandidatesmanager.exception.CandidateAlreadyExistsException;
 import pe.com.seek.seekcandidatesmanager.exception.CandidateNotFoundException;
-import pe.com.seek.seekcandidatesmanager.mapper.CandidateMapper;
+import pe.com.seek.seekcandidatesmanager.mapper.CandidateDTOMapper;
 import pe.com.seek.seekcandidatesmanager.repository.CandidateRepository;
 import pe.com.seek.seekcandidatesmanager.service.CandidateService;
 
@@ -19,20 +19,21 @@ import java.util.stream.Collectors;
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
-    private final CandidateMapper candidateMapper;
+    private final CandidateDTOMapper candidateDTOMapper;
 
     @Override
     public List<CandidateDTO> getAll() {
         return candidateRepository.findAll()
                 .stream()
-                .map(candidateMapper)
+                .map(candidateDTOMapper)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<CandidateDTO> getById(Long id) {
+    public CandidateDTO getById(Long id) {
         return candidateRepository.findById(id)
-                .map(candidateMapper);
+                .map(candidateDTOMapper)
+                .orElseThrow(() -> new CandidateNotFoundException("Candidate not found with id=" + id));
     }
 
     @Override
@@ -41,35 +42,44 @@ public class CandidateServiceImpl implements CandidateService {
 
         return Optional.of(candidateRepository.existsByEmail(email))
                 .filter(exist -> !exist)
-                .map(notExists -> Candidate.builder()
-                        .name(candidateDTO.getName())
-                        .email(candidateDTO.getEmail())
-                        .gender(candidateDTO.getGender())
-                        .salaryExpected(candidateDTO.getSalaryExpected())
-                        .build()
-                )
+                .map(notExists -> this.toEntity(candidateDTO))
                 .map(candidateRepository::save)
-                .map(candidateMapper)
+                .map(candidateDTOMapper)
                 .orElseThrow(() -> new CandidateAlreadyExistsException("Candidate already exists"));
     }
 
     @Override
     public CandidateDTO updateById(Long id, CandidateDTO candidateDTO) {
         return candidateRepository.findById(id)
-                .map(candidate -> candidate.toBuilder()
-                        .name(candidateDTO.getName())
-                        .gender(candidateDTO.getGender())
-                        .salaryExpected(candidateDTO.getSalaryExpected())
-                        .build()
-                )
+                .map(candidate -> this.updateEntity(candidate, candidateDTO))
                 .map(candidateRepository::save)
-                .map(candidateMapper)
-                .orElseThrow(() -> new CandidateNotFoundException("Candidate not found"));
+                .map(candidateDTOMapper)
+                .orElseThrow(() -> new CandidateNotFoundException("Candidate not found with id=" + id));
     }
 
     @Override
     public void deleteById(Long id) {
-        candidateRepository.deleteById(id);
+        candidateRepository.findById(id)
+                .ifPresentOrElse(candidateRepository::delete, () -> {
+                    throw new CandidateNotFoundException("Candidate not found with id=" + id);
+                });
+    }
+
+    private Candidate toEntity(CandidateDTO candidateDTO) {
+        return Candidate.builder()
+                .name(candidateDTO.getName())
+                .email(candidateDTO.getEmail())
+                .gender(candidateDTO.getGender())
+                .salaryExpected(candidateDTO.getSalaryExpected())
+                .build();
+    }
+
+    private Candidate updateEntity(Candidate candidate, CandidateDTO candidateDTO) {
+        return candidate.toBuilder()
+                .name(candidateDTO.getName())
+                .gender(candidateDTO.getGender())
+                .salaryExpected(candidateDTO.getSalaryExpected())
+                .build();
     }
 
 }
