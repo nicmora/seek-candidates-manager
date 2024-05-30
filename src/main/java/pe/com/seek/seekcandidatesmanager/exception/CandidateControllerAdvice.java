@@ -33,7 +33,7 @@ public class CandidateControllerAdvice {
     public ResponseEntity<Map<String, Object>> handleException(Exception ex) {
         Map<String, Object> errorResponse = Map.of("status", "Internal Server Error",
                 "code", HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "message", ex.getMessage());
+                "message", "Unknown error");
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }

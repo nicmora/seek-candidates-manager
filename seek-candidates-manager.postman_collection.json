@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "c6ae38ab-2837-41ce-9068-254dbcca2aae",
 		"name": "seek-candidates-manager",
+		"description": "Application that manages information on candidates applying for selection and recruitment at SEEK",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13470508"
 	},
@@ -36,9 +37,92 @@
 								"v1",
 								"candidates"
 							]
-						}
+						},
+						"description": "Retrieve a candidates collection or empty list"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/seek-candidates-manager/api/v1/candidates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"seek-candidates-manager",
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"John Doe\",\n        \"email\": \"john@example.com\",\n        \"gender\": \"M\",\n        \"salaryExpected\": 50000\n    },\n    {\n        \"name\": \"Jane Smith\",\n        \"email\": \"jane@example.com\",\n        \"gender\": \"F\",\n        \"salaryExpected\": 60000\n    },\n    {\n        \"name\": \"Michael Johnson\",\n        \"email\": \"michael@example.com\",\n        \"gender\": \"M\",\n        \"salaryExpected\": 55000\n    }\n]"
+						},
+						{
+							"name": "500 INTERNAL SERVER ERROR",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Internal Server Error\",\n    \"code\": 500,\n    \"message\": \"Unknown Error\"\n}"
+						}
+					]
 				},
 				{
 					"name": "getById",
@@ -62,9 +146,149 @@
 									"value": "1"
 								}
 							]
-						}
+						},
+						"description": "Find a candidate by id"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/seek-candidates-manager/api/v1/candidates?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"seek-candidates-manager",
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 50000\n}"
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=999",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found\"\n}"
+						},
+						{
+							"name": "500 INTERNAL SERVER ERROR",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=5",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Internal Server Error\",\n    \"code\": 500,\n    \"message\": \"Unknown Error\"\n}"
+						}
+					]
 				},
 				{
 					"name": "create",
@@ -73,7 +297,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 10000\n}",
+							"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 80000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,9 +314,134 @@
 								"v1",
 								"candidates"
 							]
-						}
+						},
+						"description": "Persist a new candidate as long as one with the same email does not already exist"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "201 CREATED",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 80000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/seek-candidates-manager/api/v1/candidates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"seek-candidates-manager",
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 80000\n}"
+						},
+						{
+							"name": "409 CONFLICT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 50000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": "{\n    \"status\": \"Conflict\",\n    \"code\": 409,\n    \"message\": \"Candidate already exists\"\n}"
+						},
+						{
+							"name": "500 INTERNAL SERVER ERROR",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 1000.5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Internal Server Error\",\n    \"code\": 500,\n    \"message\": \"Unknown Error\"\n}"
+						}
+					]
 				},
 				{
 					"name": "updateByName",
@@ -101,7 +450,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Obi Wan Kenobi\",\n    \"email\": \"obiwan@gmail.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 20000\n}",
+							"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,9 +474,149 @@
 									"value": "6"
 								}
 							]
-						}
+						},
+						"description": "Update a candidate by id, as long as one exists."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/seek-candidates-manager/api/v1/candidates?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"seek-candidates-manager",
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}"
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=999",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "999"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Not Found\",\n    \"code\": 404,\n    \"message\": \"Candidate not found\"\n}"
+						},
+						{
+							"name": "500 INTERNAL SERVER ERROR",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=5",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Internal Server Error\",\n    \"code\": 500,\n    \"message\": \"Unknown Error\"\n}"
+						}
+					]
 				},
 				{
 					"name": "deleteByName",
@@ -151,9 +640,137 @@
 									"value": "6"
 								}
 							]
-						}
+						},
+						"description": "Delete a candidate by id"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/seek-candidates-manager/api/v1/candidates?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"seek-candidates-manager",
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "500 INTERNAL SERVER ERROR",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Connor\",\n    \"email\": \"johnconnor@example.com\",\n    \"gender\": \"M\",\n    \"salaryExpected\": 30000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/api/v1/candidates?id=5",
+									"host": [
+										"{{SEEK_CANDIDATES_MANAGER_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"description": "Secured api for candidate management (first the authentication process is required)",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{SEEK_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -182,7 +799,53 @@
 					"path": [
 						"health"
 					]
+				},
+				"description": "Health check application"
+			},
+			"response": []
+		},
+		{
+			"name": "auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"const token = responseJson.token;",
+							"",
+							"pm.collectionVariables.set(\"SEEK_TOKEN\", token);",
+							"",
+							"console.log(\"Token set for the collection\", token);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"seekuser\",\n    \"password\": \"seekpass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SEEK_CANDIDATES_MANAGER_URL}}/auth",
+					"host": [
+						"{{SEEK_CANDIDATES_MANAGER_URL}}"
+					],
+					"path": [
+						"auth"
+					]
+				},
+				"description": "The token will be set automatically in the Postman collection"
 			},
 			"response": []
 		}
@@ -213,6 +876,11 @@
 		{
 			"key": "SEEK_CANDIDATES_MANAGER_URL",
 			"value": "http://localhost:8080/seek-candidates-manager",
+			"type": "string"
+		},
+		{
+			"key": "SEEK_TOKEN",
+			"value": "token",
 			"type": "string"
 		}
 	]
