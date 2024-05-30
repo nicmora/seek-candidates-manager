@@ -58,7 +58,6 @@ public class CandidateServiceImpl implements CandidateService {
         return candidateRepository.findById(id)
                 .map(candidate -> candidate.toBuilder()
                         .name(candidateDTO.getName())
-                        .email(candidateDTO.getEmail())
                         .gender(candidateDTO.getGender())
                         .salaryExpected(candidateDTO.getSalaryExpected())
                         .build()
