@@ -1,0 +1,8 @@
+-- V1__Alter_candidates_table.sql
+ALTER TABLE candidates
+    MODIFY COLUMN id BIGINT AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE candidates
+    MODIFY COLUMN `name` VARCHAR (255) NOT NULL,
+    MODIFY COLUMN email VARCHAR (255) NOT NULL,
+    MODIFY COLUMN salary_expected INT DEFAULT 0;
